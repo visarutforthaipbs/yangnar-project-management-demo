@@ -24,6 +24,12 @@ jobs:
       - run: npm run build
         env:
           GITHUB_PAGES: 'true'
+      - name: Normalize repository asset directory
+        run: |
+          mv dist/client/yangnar-project-management-demo/_next dist/client/_next
+          rmdir dist/client/yangnar-project-management-demo
+          touch dist/client/.nojekyll
+          test -s dist/client/index.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
